@@ -1,0 +1,36 @@
+<ion-content class="signup-bg" fullscreen>
+  <div class="header-section">
+    <ion-button fill="clear" size="small" color="dark" (click)="goBack()">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1>Sign Up</h1>
+    <p>
+      Daftar sekarang untuk mendapatkan info realtime, melaporkan kejadian dengan mudah,
+      dan mengelola data pribadi secara aman.
+    </p>
+  </div>
+
+  <div class="form-container">
+    <h2>Register</h2>
+
+    <ion-list lines="none">
+      <ion-item>
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Masukan Nama Lengkap"></ion-input>
+      </ion-item>
+
+      <!-- (Salin semua input dari signup di sini...) -->
+
+    </ion-list>
+
+    <div class="upload-section">
+      <label>*Unggah Foto Diri</label>
+      <div class="upload-box">
+        <ion-icon name="add-outline"></ion-icon>
+      </div>
+      <small>jpg/png, maksimal 5mb</small>
+    </div>
+
+    <ion-button expand="block" class="signup-btn">Sign Up</ion-button>
+  </div>
+</ion-content>
