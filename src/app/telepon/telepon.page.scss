@@ -1,0 +1,176 @@
+/* 🔥 Bagian Header Hijau */
+.top-section-darurat {
+  background: #9fcab0;
+  min-height: 25%;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 28px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Tulisan KONTAK DARURAT */
+.darurat-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* 🔥 Foto telepon bulat */
+.darurat-hero {
+  display: flex;
+  justify-content: center;
+  margin-top: -55px;   /* tarik ke atas nempel header */
+  margin-bottom: 30px; /* jarak dengan card */
+}
+
+.darurat-hero img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  object-fit: contain;
+}
+
+/* 🔥 Kotak daftar kontak */
+.scroll-card {
+  margin: 0 16px 24px;
+  padding: 16px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+  margin-top: 10px;
+}
+
+/* Area dalam card scrollable */
+.list-scroll {
+  max-height: 420px;    /* 🔥 dibuat lebih panjang dari sebelumnya */
+  overflow-y: auto;
+  padding-right: 6px;
+  scroll-behavior: smooth;
+}
+
+/* Item kontak */
+.contact {
+  --background: #fff;
+  margin: 10px 4px;
+  border-radius: 18px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  padding: 6px 10px;
+}
+
+.contact h2 {
+  margin: 10px 0;
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.number {
+  margin-left: 12px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #22a6d1;
+}
+
+.copyable {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* Scrollbar custom */
+.list-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.list-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.18);
+  border-radius: 8px;
+}
+.list-scroll::-webkit-scrollbar-track {
+  background: rgba(0,0,0,.05);
+  border-radius: 8px;
+}
+
+/* 🔙 Tombol back */
+.back-wrapper {
+  margin: 16px;
+  background: rgba(194, 226, 206, 0.8);
+}
+
+.back-btn {
+  background: rgba(194, 226, 206, 0.8);
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 22px;
+  color: #2e3d2c;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+.back-btn:hover {
+  transform: scale(1.1);
+  background: #9fcab0;
+}
+
+/* 🔥 Navigasi bawah */
+ion-tab-bar {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Biar tiap tombol tab ukurannya sama */
+ion-tab-button {
+  flex: 1;
+  --color: #888;
+  --color-selected: #4CAF70;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Icon dalam tab */
+ion-tab-button ion-icon {
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+
+/* Hover tab */
+ion-tab-button:hover {
+  transform: scale(1.1);
+  color: #4CAF70;
+}
+
+/* Tab aktif */
+ion-tab-button.ion-selected {
+  color: #4CAF70;
+}
+
+/* ===================== */
+/* 📱 RESPONSIVE RULES   */
+/* ===================== */
+
+/* Tablet (>= 768px) */
+@media (min-width: 768px) {
+  .list-scroll {
+    max-height: 180px;
+  }
+}
+
+/* Laptop (>= 1024px) */
+@media (min-width: 1024px) {
+  .list-scroll {
+    max-height: 300px;
+  }
+}
+
+/* Desktop besar (>= 1400px) */
+@media (min-width: 1400px) {
+  .list-scroll {
+    max-height: 420px;
+  }
+}

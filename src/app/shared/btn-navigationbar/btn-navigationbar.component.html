@@ -1,0 +1,21 @@
+<ion-tab-bar slot="bottom">
+  <ion-tab-button tab="home" [routerLink]="['/dashboard']" aria-label="Beranda">
+    <ion-icon name="home" aria-hidden="true"></ion-icon>
+    <ion-label>Home</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button tab="report" [routerLink]="['/laporan']" aria-label="Laporan">
+    <ion-icon name="document-text" aria-hidden="true"></ion-icon>
+    <ion-label>Laporan</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button tab="notifications" [routerLink]="['/pengumuman']" aria-label="Notifikasi">
+    <ion-icon name="notifications" aria-hidden="true"></ion-icon>
+    <ion-label>Notifikasi</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button tab="call" [routerLink]="['/telepon']" aria-label="Telepon">
+    <ion-icon name="call" aria-hidden="true"></ion-icon>
+    <ion-label>Telepon</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

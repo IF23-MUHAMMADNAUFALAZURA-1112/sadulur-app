@@ -1,0 +1,65 @@
+/* 🌟 Header Icon Container */
+.profile-header-icons {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+/* 🌟 Bagian Hijau Atas */
+.profile-top {
+  background: #a8d5b9;
+  padding: 3px 20px 30px;  /* lebih tinggi ke bawah */
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.profile-top-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px; /* dorong turun */
+}
+
+.profile-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+
+/* 🌟 Navigasi Bawah */
+ion-tab-bar {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around; /* bagi rata */
+}
+
+/* Biar tiap tombol tab ukurannya sama */
+ion-tab-button {
+  flex: 1;
+  --color: #888;            /* warna default */
+  --color-selected: #4CAF70; /* warna aktif */
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Icon dalam tab */
+ion-tab-button ion-icon {
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+
+/* Hover tab */
+ion-tab-button:hover {
+  transform: scale(1.1);
+  color: #4CAF70;
+}
+
+/* Tab aktif */
+ion-tab-button.ion-selected {
+  color: #4CAF70;
+}

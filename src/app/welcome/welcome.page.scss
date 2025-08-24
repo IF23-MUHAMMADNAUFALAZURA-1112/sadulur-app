@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Sarina&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 ion-content.welcome-bg {
   --background: #ffffff;
@@ -12,26 +13,34 @@ ion-content.welcome-bg {
 }
 
 .logo-container {
-  padding-top: 18vh; // jarak dari atas layar = 10% tinggi layar
+  padding-top: 18vh;
   text-align: center;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   .logo {
-    width: 30vw; // lebar logo = 30% lebar layar
+    width: 30vw;
     max-width: 150px;
     height: auto;
-    border-radius: 100%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
   }
 
   .brand {
-    font-family: 'monospace';
-    font-size: 5vw; // ukuran font fleksibel
-    max-font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 5vw;
     margin-top: 3vh;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
+    font-weight: 600;
   }
 }
-//responsive di tablet
+
 @media screen and (min-width: 768px) {
   .logo-container {
     padding-top: 8vh;
@@ -49,31 +58,47 @@ ion-content.welcome-bg {
 .bottom-box {
   margin-top: auto;
   background: #a6d8b8;
+  height: 35%;
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
   padding: 40px 20px 60px;
   text-align: center;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.8s ease;
 
   .welcome-text {
-    font-family: 'cursive';
-    font-size: 24px;
+    font-family: 'Sarina', cursive;
+    font-size: 26px;
     font-weight: bold;
     margin-bottom: 10px;
+    color: #1a1a1a;
   }
 
   p {
-    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
     margin-bottom: 30px;
+    color: #333;
   }
 
   .button-group {
     display: flex;
     justify-content: space-around;
-    gap: 10px;
+    gap: 12px;
 
     ion-button {
       width: 45%;
       font-weight: bold;
+      font-size: 16px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    ion-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
   }
 }
+
+

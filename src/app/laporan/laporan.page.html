@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-title>SADULUR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- ✅ Background hijau + putih -->
+  <div class="background-wrapper">
+    <div class="top-green"> <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard" text=""></ion-back-button>
+    </ion-buttons></div>
+    <div class="bottom-white"></div>
+  </div>
+
+  <!-- ✅ Kotak laporan -->
+  <div class="center-wrapper">
+    <ion-card>
+      <!-- Avatar -->
+      <div class="avatar-laporan">
+        <img src="assets/img/logolaporan.png"  alt="default avatar"/>
+      </div>
+
+      <!-- Judul -->
+      <div class="judul">BUAT LAPORAN</div>
+
+      <!-- Dropdown -->
+      <ion-item class="input-box" lines="none">
+ <ion-select 
+    placeholder="Pilih Jenis Laporan" 
+    interface="popover" 
+    [interfaceOptions]="popoverOptions">
+  <ion-select-option value="jalan">Keluhan</ion-select-option>
+  <ion-select-option value="lampu">Aspirasi</ion-select-option>
+  <ion-select-option value="sampah">Gangguan</ion-select-option>
+</ion-select>
+
+      </ion-item>
+
+      <!-- Deskripsi -->
+      <div class="deskripsi-wrapper">
+        <div class="label-deskripsi">Deskripsi</div>
+        <ion-item class="input-box" lines="none">
+          <ion-textarea placeholder="Tulis Deskripsi Masalah Disini........"></ion-textarea>
+        </ion-item>
+      </div>
+
+      <!-- Tombol Kirim -->
+      <div class="btn-wrapper">
+        <ion-button class="btn-kirim">Kirim</ion-button>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>
+
+
+

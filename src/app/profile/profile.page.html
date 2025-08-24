@@ -1,0 +1,75 @@
+<ion-content>
+  <!-- 🌟 Bagian Profile Top -->
+  <div class="profile-top">
+    <!-- ✅ Ikon Back (kiri) & Key (kanan) -->
+    <div class="profile-header-icons">
+      <ion-icon name="arrow-back-outline" class="back-btn" (click)="goBack()"></ion-icon>
+      <ion-icon name="key-outline" class="key-btn" routerLink="/password" ></ion-icon>
+    </div>
+
+    <div class="profile-top-container">
+      <ion-avatar class="profile-photo">
+  <img src="https://via.placeholder.com/100" alt="Foto profil pengguna" />
+</ion-avatar>
+
+      <div class="profile-nik-side">
+        <h2 class="profile-name">NAMA LENGKAP</h2>
+        <p class="profile-nik">1111222233334444</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🌟 Form -->
+  <div class="profile-box">
+    <ion-item class="input-box">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      <ion-input placeholder="Nama Lengkap"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-box">
+      <ion-icon name="card-outline" slot="start"></ion-icon>
+      <ion-input placeholder="NIK"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-box">
+      <ion-icon name="mail-outline" slot="start"></ion-icon>
+      <ion-input type="email" placeholder="Email"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-box">
+      <ion-icon name="logo-whatsapp" slot="start"></ion-icon>
+      <ion-input type="text" placeholder="No WhatsApp"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-box">
+      <ion-icon name="call-outline" slot="start"></ion-icon>
+      <ion-input type="text" placeholder="No Telepon"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-box">
+      <ion-icon name="location-outline" slot="start"></ion-icon>
+      <ion-input type="text" placeholder="Alamat Lengkap"></ion-input>
+    </ion-item>
+
+    <!-- 🌟 Kotak Foto -->
+     <div class="foto-row">
+    <ion-item class="foto-item">
+      <ion-label position="stacked">Foto Anda:</ion-label>
+      <div class="foto-box">
+        <ion-icon name="camera-outline"></ion-icon>
+        <span>Upload</span>
+      </div>
+    </ion-item>
+    <!-- 🌟 Tombol Bulat Save & Edit -->
+     <div class="circle-btn-wrapper">
+      <ion-fab-button class="circle-btn save-btn">
+        <ion-icon name="save-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button class="circle-btn edit-btn">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-fab-button>
+    </div>
+  </div>
+  </div>
+
+  

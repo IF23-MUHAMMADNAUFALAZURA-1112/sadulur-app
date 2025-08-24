@@ -1,36 +1,302 @@
 <ion-content class="signup-bg" fullscreen>
   <div class="header-section">
-    <ion-button fill="clear" size="small" color="dark" (click)="goBack()">
-      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-    </ion-button>
+    <div class="back-wrapper">
+      <ion-icon
+        name="arrow-back-outline"
+        class="back-btn"
+        (click)="goBack()"
+        aria-label="Kembali"
+      >
+      </ion-icon>
+    </div>
     <h1>Sign Up</h1>
     <p>
-      Daftar sekarang untuk mendapatkan info realtime, melaporkan kejadian dengan mudah,
-      dan mengelola data pribadi secara aman.
+      Daftar sekarang untuk mendapatkan info realtime, melaporkan kejadian
+      dengan mudah, dan mengelola data pribadi secara aman.
     </p>
   </div>
 
   <div class="form-container">
     <h2>Register</h2>
 
-    <ion-list lines="none">
-      <ion-item>
-        <ion-icon name="person-outline" slot="start"></ion-icon>
-        <ion-input placeholder="Masukan Nama Lengkap"></ion-input>
-      </ion-item>
+    <!-- Reactive Form -->
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <ion-list lines="none">
+        <!-- Nama -->
+        <ion-item>
+          <ion-label position="stacked">
+            Nama <span style="color: red">*</span>
+          </ion-label>
+          <ion-input
+            formControlName="fullName"
+            placeholder="Masukkan nama lengkap Anda"
+            type="text"
+            autocapitalize="words"
+            maxlength="50"
+          >
+          </ion-input>
+        </ion-item>
+        <ion-note color="medium" class="ion-padding-start">
+          Contoh: Naufal Azura (maks. 50 karakter)
+        </ion-note>
+        <ion-text
+          color="danger"
+          *ngIf="f['fullName'].touched && f['fullName'].invalid"
+        >
+          <p *ngIf="f['fullName'].errors?.['required']">Nama wajib diisi.</p>
+          <p *ngIf="f['fullName'].errors?.['maxlength']">
+            Nama maksimal 50 karakter.
+          </p>
+        </ion-text>
 
-      <!-- (Salin semua input dari signup di sini...) -->
+        <!-- NIK -->
+        <ion-item>
+          <ion-label position="stacked"
+            >NIK <span style="color: red">*</span></ion-label
+          >
+          <ion-input
+            formControlName="nik"
+            placeholder="Masukkan NIK Anda (16 digit)"
+            type="text"
+            inputmode="numeric"
+            maxlength="16"
+          >
+          </ion-input>
+        </ion-item>
+        <ion-note color="medium" class="ion-padding-start"
+          >Contoh: 3201234567890123</ion-note
+        >
+        <ion-text color="danger" *ngIf="f['nik'].touched && f['nik'].invalid">
+          <p *ngIf="f['nik'].errors?.['required']">NIK wajib diisi.</p>
+          <p
+            *ngIf="f['nik'].errors?.['minlength'] || f['nik'].errors?.['maxlength']"
+          >
+            NIK harus 16 digit.
+          </p>
+        </ion-text>
 
-    </ion-list>
+        <!-- Email -->
+        <ion-item>
+          <ion-label position="stacked">
+            Email <span style="color: red">*</span>
+          </ion-label>
+          <ion-input
+            formControlName="email"
+            placeholder="Masukkan email Anda"
+            type="email"
+          >
+          </ion-input>
+        </ion-item>
 
-    <div class="upload-section">
-      <label>*Unggah Foto Diri</label>
-      <div class="upload-box">
-        <ion-icon name="add-outline"></ion-icon>
+        <ion-note color="medium" class="ion-padding-start">
+          Contoh: namaemail@gmail.com, nama@outlook.com, nama@domain.co.id
+        </ion-note>
+
+        <ion-text
+          color="danger"
+          *ngIf="f['email'].touched && f['email'].invalid"
+        >
+          <p *ngIf="f['email'].errors?.['required']">Email wajib diisi.</p>
+          <p *ngIf="f['email'].errors?.['pattern']">
+            Format email hanya diperbolehkan: @gmail.com, @yahoo.com,
+            @outlook.com, @hotmail.com, atau domain .co.id
+          </p>
+        </ion-text>
+
+        <!-- WhatsApp -->
+        <ion-item>
+          <ion-label position="stacked"
+            >No. WhatsApp <span style="color: red">*</span></ion-label
+          >
+          <ion-input
+            formControlName="whatsapp"
+            placeholder="Masukkan nomor WhatsApp Anda"
+            type="text"
+            inputmode="numeric"
+            maxlength="12"
+          >
+          </ion-input>
+        </ion-item>
+        <ion-note color="medium" class="ion-padding-start"
+          >Contoh: 628123456789</ion-note
+        >
+        <ion-text
+          color="danger"
+          *ngIf="f['whatsapp'].touched && f['whatsapp'].invalid"
+        >
+          <p *ngIf="f['whatsapp'].errors?.['required']">
+            Nomor WhatsApp wajib diisi.
+          </p>
+        </ion-text>
+
+        <!-- Telepon -->
+        <ion-item>
+          <ion-label position="stacked"
+            >No. Telepon <span style="color: red">*</span></ion-label
+          >
+          <ion-input
+            formControlName="phone"
+            placeholder="Masukkan nomor telepon Anda"
+            type="text"
+            inputmode="numeric"
+            maxlength="12"
+          >
+          </ion-input>
+        </ion-item>
+        <ion-note color="medium" class="ion-padding-start"
+          >Contoh: 02188888888</ion-note
+        >
+        <ion-text
+          color="danger"
+          *ngIf="f['phone'].touched && f['phone'].invalid"
+        >
+          <p *ngIf="f['phone'].errors?.['required']">
+            Nomor telepon wajib diisi.
+          </p>
+        </ion-text>
+
+        <!-- Alamat -->
+        <ion-item>
+          <ion-label position="stacked"
+            >Alamat <span style="color: red">*</span></ion-label
+          >
+          <ion-input
+            formControlName="address"
+            placeholder="Masukkan alamat lengkap Anda"
+            type="text"
+          >
+          </ion-input>
+        </ion-item>
+        <ion-note color="medium" class="ion-padding-start"
+          >Contoh: Jl. Kenangan No. 123, Karawang</ion-note
+        >
+        <ion-text
+          color="danger"
+          *ngIf="f['address'].touched && f['address'].invalid"
+        >
+          <p *ngIf="f['address'].errors?.['required']">Alamat wajib diisi.</p>
+        </ion-text>
+
+        <!-- Password -->
+        <ion-item>
+          <ion-label position="stacked"
+            >Password <span style="color: red">*</span></ion-label
+          >
+          <ion-input
+            formControlName="password"
+            [type]="showPassword ? 'text' : 'password'"
+            placeholder="Masukkan password"
+            maxlength="8"
+          >
+          </ion-input>
+
+        </ion-item>
+        <ion-note color="medium" class="ion-padding-start">
+          Password harus mengandung huruf besar, huruf kecil, angka, dan simbol.
+          (maks. 8 karakter)
+        </ion-note>
+        <ion-text
+          color="danger"
+          *ngIf="f['password'].touched && f['password'].invalid"
+        >
+          <p *ngIf="f['password'].errors?.['required']">
+            Password wajib diisi.
+          </p>
+          <p *ngIf="f['password'].errors?.['maxlength']">
+            Password maksimal 8 karakter.
+          </p>
+          <p *ngIf="f['password'].errors?.['pattern']">
+            Password harus kombinasi huruf besar, kecil, angka, dan simbol.
+          </p>
+        </ion-text>
+
+        <!-- Konfirmasi Password -->
+        <ion-item>
+          <ion-label position="stacked"
+            >Konfirmasi Password <span style="color: red">*</span></ion-label
+          >
+          <ion-input
+            formControlName="confirmPassword"
+            [type]="showPassword2 ? 'text' : 'password'"
+            placeholder="Ulangi password"
+            maxlength="8"
+          >
+          </ion-input>
+          <ion-button
+            fill="clear"
+            slot="end"
+            (click)="showPassword2 = !showPassword2"
+            aria-label="Tampilkan/Sembunyikan konfirmasi password"
+          >
+            <ion-icon
+              [name]="showPassword2 ? 'eye-off-outline' : 'eye-outline'"
+            ></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-text
+          color="danger"
+          *ngIf="f['confirmPassword'].touched && (f['confirmPassword'].invalid || form.hasError('passwordsMismatch'))"
+        >
+          <p *ngIf="f['confirmPassword'].errors?.['required']">
+            Konfirmasi password wajib diisi.
+          </p>
+          <p *ngIf="f['confirmPassword'].errors?.['maxlength']">
+            Maksimal 8 karakter.
+          </p>
+          <p *ngIf="form.hasError('passwordsMismatch')">
+            Konfirmasi password tidak sama.
+          </p>
+        </ion-text>
+      </ion-list>
+
+      <!-- Upload Foto -->
+      <div class="upload-section">
+        <label><span style="color: red">*</span> Unggah Foto Diri</label>
+
+        <div
+          class="upload-box"
+          role="button"
+          tabindex="0"
+          aria-label="Unggah foto diri"
+          (click)="pickImage()"
+        >
+          <ng-container *ngIf="!photoPreview">
+            <ion-icon name="add-outline"></ion-icon>
+          </ng-container>
+          <ng-container *ngIf="photoPreview">
+            <img
+              [src]="photoPreview"
+              alt="Foto diri"
+              style="max-width: 100%; max-height: 120px; border-radius: 8px"
+            />
+          </ng-container>
+        </div>
+
+        <!-- Fallback input file (web/PWA) -->
+        <input
+          type="file"
+          accept=".jpg,.jpeg,.png"
+          hidden
+          (change)="onFilePicked($event)"
+        />
+
+        <!-- Kontrol 'photo' terhubung ke FormGroup -->
+        <input formControlName="photo" type="hidden" />
+
+        <small>jpg/png, maksimal 5MB</small>
+
+        <ion-text
+          color="danger"
+          *ngIf="f['photo'].touched && f['photo'].invalid"
+        >
+          Foto wajib dipilih (format jpg/png, maks 5MB).
+        </ion-text>
       </div>
-      <small>jpg/png, maksimal 5mb</small>
-    </div>
 
-    <ion-button expand="block" class="signup-btn">Sign Up</ion-button>
+      <!-- Submit -->
+      <ion-button expand="block" class="signup-btn" type="submit"
+        >Sign Up</ion-button
+      >
+    </form>
   </div>
 </ion-content>

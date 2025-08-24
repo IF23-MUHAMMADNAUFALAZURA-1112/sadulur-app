@@ -1,0 +1,20 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-laporan',
+  templateUrl: './laporan.page.html',
+  styleUrls: ['./laporan.page.scss'],
+  standalone: false,
+})
+export class LaporanPage implements OnInit {
+  popoverOptions = {
+    cssClass: 'my-popover',
+    alignment: 'end',  // posisi dropdown ke kanan
+    side: 'bottom',     // sisi muncul (opsional)
+  };
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

@@ -1,0 +1,183 @@
+/* ✅ Background split hijau & putih */
+.background-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.top-green {
+  background: #9fcab0;
+  height: 50%;
+  border-radius: 16px;
+}
+.bottom-white {
+  background: #fff;
+  height: 50%;
+}
+.center-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;  /* mulai dari atas */
+  padding-top: 60px;       /* atur jarak dari atas biar lebih ke bawah */
+  box-sizing: border-box;
+}
+
+
+ion-card {
+  width: 90%;
+  max-width: 1200px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+  padding: 2px 20px 30px 20px;
+}
+
+/* Avatar */
+.avatar-laporan {
+  margin: 20px auto 10px auto;
+  width: 180px;
+  height: 180px;
+  
+}
+.avatar-laporan img {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 50%;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+/* Judul */
+.judul {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin: 15px 0;
+  padding-bottom: 20px;
+}
+
+/* Input & Dropdown */
+.input-box {
+  --background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-top: 15px;
+  font-size: 14px;
+  padding: 4px;
+}
+
+// ...existing code...
+
+ion-select::part(icon) {
+  right: 12px;      // Geser icon ke kanan
+  left: auto;       // Pastikan tidak ada left
+  position: absolute;
+}
+
+// Agar icon tetap di dalam input-box
+.input-box ion-select {
+  position: relative;
+  width: 100%;}
+// ...existing code...
+
+// ...existing code...
+
+ion-select-option {
+  text-align: right;
+  direction: rtl; // Membalik arah teks, icon tetap di kanan
+}
+// ...existing code...
+
+
+// Jika hanya dropdown yang ingin di kanan, gunakan:
+.input-box {
+  display: flex;
+  justify-content: flex-end; // Dropdown di kanan
+}
+.my-popover .popover-content {
+  text-align: right; /* teks opsi juga rata kanan */
+}
+
+.my-popover .popover-wrapper {
+  right: 0 !important;   /* menempel ke kanan layar */
+  left: auto !important;
+  top: auto !important;   /* biar tetap muncul di bawah input */
+}
+
+
+
+/* Label Deskripsi */
+.label-deskripsi {
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 16px 0 6px 4px;
+}
+
+/* Textarea */
+ion-textarea {
+  --background: #fff;
+  font-size: 14px;
+  min-height: 200px; /* ✅ lebih tinggi */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Tombol Kirim */
+.btn-wrapper {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-kirim {
+  --background: #9fcab0;
+  --background-hover: #8ab59c;
+  --background-activated: #7aa48c;
+  --color: #fff;
+  font-size: 13px;
+  padding: 4px 14px;
+  height: 32px;
+  border-radius: 6px;
+}
+
+/* ✅ Fix keyboard biar ga geser konten */
+ion-content {
+  --offset-bottom: 0px !important;
+  --keyboard-offset: 0px !important;
+  overscroll-behavior-y: contain;
+}
+
+/* 🔥 Navigasi bawah */
+ion-tab-bar {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around; /* bagi rata */
+}
+
+/* Biar tiap tombol tab ukurannya sama */
+ion-tab-button {
+  flex: 1; /* tiap tab tombol punya lebar sama rata */
+  --color: #888; /* warna default */
+  --color-selected: #4CAF70; /* warna aktif */
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Icon dalam tab */
+ion-tab-button ion-icon {
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+
+/* Hover tab */
+ion-tab-button:hover {
+  transform: scale(1.1);
+  color: #4CAF70; /* hijau saat hover */
+}
+
+/* Tab aktif */
+ion-tab-button.ion-selected {
+  color: #4CAF70;
+}
