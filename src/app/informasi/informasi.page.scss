@@ -1,0 +1,112 @@
+ion-content {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 100px; /* ruang agar tombol tidak ketabrak tab bar */
+  overflow-y: auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Hero section */
+h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Card styling */
+ion-card {
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin: 8px 0;
+}
+
+ion-card-title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+ion-card-content {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.4;
+}
+
+/* Ikon kategori */
+ion-card-title ion-icon {
+  font-size: 18px;
+}
+
+/* Tombol CTA */
+ion-button {
+  margin-top: 24px;
+  --border-radius: 30px;
+  --box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+
+  /* Normal */
+  --background: linear-gradient(135deg, #6bcf91, #4caf70);
+
+  /* Hover & focus */
+  --background-hover: linear-gradient(135deg, #5ec582, #45a764);
+  --background-focused: linear-gradient(135deg, #5ec582, #45a764);
+
+  /* Saat ditekan (active) */
+  --background-activated: linear-gradient(135deg, #55b877, #3d955a);
+
+  --color: #ffffff; /* teks putih */
+}
+
+
+/* Judul dengan ikon */
+.info-title {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.info-title ion-icon {
+  font-size: 22px;
+  color: #007bff; /* biru khas info */
+  margin-right: 8px;
+}
+
+/* Header kustom */
+.custom-header {
+  --background: linear-gradient(135deg, #6bcf91, #4caf70); /* hijau gradasi */
+  --color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.custom-header ion-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+}
+
+/* Judul samping panah (Informasi) */
+.header-title {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-left: 4px;
+}
+
+.header-title ion-icon {
+  font-size: 18px;
+  margin-right: 6px;
+}

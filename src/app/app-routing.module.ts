@@ -61,6 +61,10 @@ const routes: Routes = [
       import('./telepon/telepon.module').then(m => m.TeleponPageModule),
     data: { showNavbar: true }
   },
+  {
+    path: 'informasi',
+    loadChildren: () => import('./informasi/informasi.module').then( m => m.InformasiPageModule)
+  },
 ];
 
 @NgModule({

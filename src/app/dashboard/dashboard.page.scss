@@ -13,6 +13,7 @@
   display: flex;
   justify-content: space-between; /* teks di kiri, avatar di kanan */
   align-items: center; /* vertikal rata */
+  margin-top: 12px; /* 🔥 semua isi header (teks + avatar) turun */
 }
 
 .header-content h1 {
@@ -142,34 +143,3 @@ ion-avatar.profile-avatar:hover {
   display: block;
 }
 
-/* 🔥 Navigasi bawah */
-ion-tab-bar {
-  background-color: #fff;
-  display: flex;
-  justify-content: space-around; /* bagi rata */
-}
-
-/* Biar tiap tombol tab ukurannya sama */
-ion-tab-button {
-  flex: 1; /* tiap tab tombol punya lebar sama rata */
-  --color: #888; /* warna default */
-  --color-selected: #4CAF70; /* warna aktif */
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-/* Icon dalam tab */
-ion-tab-button ion-icon {
-  font-size: 22px;
-  margin-bottom: 2px;
-}
-
-/* Hover tab */
-ion-tab-button:hover {
-  transform: scale(1.1);
-  color: #4CAF70; /* hijau saat hover */
-}
-
-/* Tab aktif */
-ion-tab-button.ion-selected {
-  color: #4CAF70;
-}

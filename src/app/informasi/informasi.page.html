@@ -1,0 +1,95 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="custom-header">
+    <ion-buttons slot="start" class="flex items-center">
+      <ion-back-button defaultHref="/laporan" text="" color="light"></ion-back-button>
+      <span class="header-title">
+        <ion-icon name="information-circle-outline"></ion-icon>
+        Informasi
+      </span>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Hero -->
+  <div class="flex flex-col items-center text-center mt-6 mb-8">
+    <h1 class="text-xl font-bold flex items-center">
+      <ion-icon 
+        name="information-circle-outline" 
+        size="small"
+        style="color:#2563eb; margin-right:8px;">
+      </ion-icon>
+      Panduan Pengajuan Laporan
+    </h1>
+    <p class="text-sm text-gray-600 mt-2 max-w-md">
+      Sebelum mengajukan laporan, pastikan Anda memilih kategori yang sesuai 
+      dan menuliskan deskripsi dengan jelas agar dapat ditindaklanjuti lebih cepat.
+    </p>
+  </div>
+
+  <!-- Kategori -->
+  <div class="grid gap-4">
+    <!-- Keluhan -->
+    <ion-card class="rounded-2xl shadow-sm">
+      <ion-card-header>
+        <ion-card-title class="text-lg font-semibold flex items-center">
+          <ion-icon 
+            name="alert-circle-outline" 
+            size="small"
+            style="color:#ef4444; margin-right:8px;">
+          </ion-icon>
+          Keluhan
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="text-sm text-gray-700 leading-relaxed">
+        Gunakan kategori ini jika terdapat masalah umum di lingkungan Anda, 
+        seperti fasilitas rusak atau pelayanan tidak sesuai.
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Aspirasi -->
+    <ion-card class="rounded-2xl shadow-sm">
+      <ion-card-header>
+        <ion-card-title class="text-lg font-semibold flex items-center">
+          <ion-icon 
+            name="bulb-outline" 
+            size="small"
+            style="color:#eab308; margin-right:8px;">
+          </ion-icon>
+          Aspirasi
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="text-sm text-gray-700 leading-relaxed">
+        Pilih kategori ini jika Anda ingin menyampaikan ide, usulan, atau saran 
+        yang dapat membantu pengembangan layanan.
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Gangguan -->
+    <ion-card class="rounded-2xl shadow-sm">
+      <ion-card-header>
+        <ion-card-title class="text-lg font-semibold flex items-center">
+          <ion-icon 
+            name="construct-outline" 
+            size="small"
+            style="color:#22c55e; margin-right:8px;">
+          </ion-icon>
+          Gangguan
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="text-sm text-gray-700 leading-relaxed">
+        Gunakan kategori ini untuk melaporkan gangguan atau kerusakan teknis 
+        yang memerlukan penanganan segera.
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- CTA -->
+  <div class="mt-10 flex justify-center">
+    <ion-button expand="block" shape="round" size="large" routerLink="/laporan">
+      Saya Mengerti, Lanjutkan
+    </ion-button>
+  </div>
+
+</ion-content>

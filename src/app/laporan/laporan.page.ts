@@ -1,20 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-laporan',
   templateUrl: './laporan.page.html',
   styleUrls: ['./laporan.page.scss'],
-  standalone: false,
+  standalone: false
 })
-export class LaporanPage implements OnInit {
-  popoverOptions = {
-    cssClass: 'my-popover',
-    alignment: 'end',  // posisi dropdown ke kanan
-    side: 'bottom',     // sisi muncul (opsional)
-  };
-  constructor() { }
+export class LaporanPage {
+  constructor(private navCtrl: NavController) {}
 
-  ngOnInit() {
+  goToInformasi() {
+    this.navCtrl.navigateForward('/informasi');
   }
-
 }
