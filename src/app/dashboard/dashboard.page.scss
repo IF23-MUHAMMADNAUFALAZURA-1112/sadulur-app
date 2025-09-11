@@ -1,3 +1,15 @@
+ion-content {
+  --overflow: auto;
+  overflow-y: auto !important;
+}
+
+
+.page-wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 /* 🔥 Bagian Header Hijau di atas */
 .top-section {
   background: linear-gradient(135deg, #6bcf91, #4caf70); /* gradasi hijau */
@@ -8,12 +20,33 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* bayangan bawah */
 }
 
+/* 🔥 Judul Section */
+.section-title {
+  text-align: center;
+  margin: 20px 0 6px 0; /* jarak bawah diperkecil */
+}
+
+.section-title h2 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0;
+  color: #4caf70;
+  position: relative;
+  display: inline-block;
+  letter-spacing: 1px; /* biar lebih elegan */
+}
+
+/* ❌ Hilangkan garis bawah hijau */
+.section-title h2::after {
+  display: none;
+}
+
 /* 🔥 Layout header: teks kiri + avatar kanan */
 .header-content {
   display: flex;
-  justify-content: space-between; /* teks di kiri, avatar di kanan */
-  align-items: center; /* vertikal rata */
-  margin-top: 12px; /* 🔥 semua isi header (teks + avatar) turun */
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
 }
 
 .header-content h1 {
@@ -21,7 +54,7 @@
   font-weight: bold;
   margin-top: 30px;
   margin-bottom: 10px;
-  text-shadow: 2px 2px 6px rgb(200, 199, 199); /* efek bayangan teks */
+  text-shadow: 2px 2px 6px rgb(200, 199, 199);
   color: #fff;
 }
 
@@ -41,47 +74,43 @@ ion-avatar.profile-avatar {
   min-width: 80px;
   min-height: 80px;
   overflow: hidden;
-  flex-shrink: 0; /* biar tidak gepeng saat flexbox */
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
- 
 }
 
 ion-avatar.profile-avatar img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* crop biar pas */
-  border-radius: 50%; /* lingkaran penuh */
+  object-fit: cover;
+  border-radius: 50%;
   display: block;
 }
 
-/* Efek hover avatar */
 ion-avatar.profile-avatar:hover {
-  transform: scale(1.1); /* sedikit membesar */
+  transform: scale(1.1);
   transition: transform 0.2s ease;
 }
 
 /* 🔥 Section shortcut */
 .shortcut-section {
-  padding: 16px;
+  padding: 8px 16px 16px 16px; /* jarak atas lebih kecil */
 }
 
-/* Card utama shortcut */
 .shortcut-section ion-card {
   text-align: center;
-  border-radius: 18px;
+  border-radius: 16px;
   background: #fff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  aspect-ratio: 1 / 1.2; /* perbandingan ukuran */
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  width: 160px;
+  height: 200px;
+  flex-shrink: 0;
+  padding: 10px;
+  margin-top: 0; /* hilangkan jarak atas card */
 }
 
-/* Hover card */
 .shortcut-section ion-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -89,10 +118,10 @@ ion-avatar.profile-avatar:hover {
 
 /* Gambar di dalam card */
 .shortcut-section img {
-  width: clamp(50px, 7vw, 80px); /* responsif */
+  width: clamp(50px, 7vw, 80px);
   height: auto;
   object-fit: contain;
-  margin: 6px auto 10px auto;
+  margin: 4px auto 8px auto; /* jarak diperkecil */
 }
 
 /* Judul card */
@@ -100,46 +129,169 @@ ion-avatar.profile-avatar:hover {
   font-size: clamp(14px, 1.2vw, 36px);
   font-weight: 600;
   color: #4caf70;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   text-transform: uppercase;
   text-align: center;
 }
 
 /* Isi teks card */
 .shortcut-section ion-card-content {
-  font-size: clamp(9px, 1vw, 14px);
-  color: #666;
-  line-height: 1.3;
+  font-size: 16px;
+  font-weight: 500;
+  color: #444;
+  line-height: 1.4;
   text-align: center;
   padding: 0 6px;
+}
+
+/* 🔥 Scroll cards */
+.shortcut-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.shortcut-scroll ion-card {
+  min-width: 280px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  border-radius: 12px;
 }
 
 /* 🔥 Media query untuk layar lebih lebar */
 @media (min-width: 768px) {
   .shortcut-section {
-    padding: 24px;
+    padding: 16px 24px;
   }
   .shortcut-section ion-card {
-    aspect-ratio: 1 / 1; /* jadi kotak di layar besar */
+    aspect-ratio: 1 / 1;
   }
 }
 
 /* 🔥 Konten panjang (gambar scrollable) */
 .long-section {
-  margin: 20px 12px;
+  margin: 10px 12px 0 12px;
 }
 
 .long-section ion-card {
   border-radius: 20px;
-  overflow: hidden; /* gambar ikut radius */
+  overflow: hidden;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
   margin-bottom: 20px;
 }
 
 .long-section ion-card img {
   width: 100%;
-  height: 200px;
-  object-fit: cover; /* gambar memenuhi frame */
+  height: 220px;
+  object-fit: cover;
   display: block;
 }
 
+/* 🔥 Scroll horizontal */
+.horizontal-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.horizontal-scroll ion-card {
+  flex: 0 0 auto;
+  width: 80%;
+  scroll-snap-align: start;
+}
+
+/* ===== Program Section ===== */
+.section-title {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.section-title h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2e7d32; /* hijau */
+}
+
+/* ===== Program Section ===== */
+.program-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 12px;
+}
+
+/* 🔥 Program Section */
+.program-card {
+  border-radius: 16px;
+  margin: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+}
+
+/* Flex wrapper */
+.program-card .program-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* Icon lebih besar & rata tengah */
+.program-card .icon-box {
+  flex: 0 0 80px;       /* ukuran lebih besar */
+  height: 80px;
+  margin-right: 16px;   /* jarak ke teks */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.program-card .icon-box img {
+  width: 70px;          /* biar proporsional */
+  height: 70px;
+  object-fit: contain;  /* tetap rapi */
+}
+
+/* Content */
+.program-card .content-box {
+  flex: 1;
+}
+
+/* List style */
+.program-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+
+.program-card ul li {
+  font-size: 13px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.program-card ul li::before {
+  content: "✔";
+  color: #2e7d32;
+  font-weight: bold;
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+.page-wrapper {
+  padding-bottom: 90px; /* biar konten bawah tidak ketutup tab bar */
+}
+
+/* Responsive grid untuk layar besar */
+@media (min-width: 768px) {
+  .program-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 0 16px;
+  }
+}

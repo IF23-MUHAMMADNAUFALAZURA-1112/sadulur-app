@@ -1,65 +1,94 @@
-/* 🌟 Header Icon Container */
-.profile-header-icons {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  right: 16px;
-  display: flex;
-  align-items: center;
-  color: #fff;
+/* Header */
+.custom-header {
+  --background: linear-gradient(135deg, #6bcf91, #4caf70); /* ✅ gradasi hijau */
+  min-height: 72px;
+  padding-top: 12px;  
+  padding-bottom: 12px;
 }
 
-/* 🌟 Bagian Hijau Atas */
-.profile-top {
-  background: #a8d5b9;
-  padding: 3px 20px 30px;  /* lebih tinggi ke bawah */
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-}
-
-.profile-top-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 10px; /* dorong turun */
-}
-
-.profile-name {
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff;
-  text-align: center;
-}
-
-/* 🌟 Navigasi Bawah */
-ion-tab-bar {
-  background-color: #fff;
-  display: flex;
-  justify-content: space-around; /* bagi rata */
-}
-
-/* Biar tiap tombol tab ukurannya sama */
-ion-tab-button {
-  flex: 1;
-  --color: #888;            /* warna default */
-  --color-selected: #4CAF70; /* warna aktif */
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-/* Icon dalam tab */
-ion-tab-button ion-icon {
+/* ✅ Style khusus untuk teks di dalam header */
+.custom-header ion-title {
+  color: #fff; /* putih */
   font-size: 22px;
-  margin-bottom: 2px;
+  font-weight: 700; /* bold */
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+  margin: 0;
+  text-transform: uppercase;
 }
 
-/* Hover tab */
-ion-tab-button:hover {
-  transform: scale(1.1);
-  color: #4CAF70;
+/* Background Konten */
+.announcement-content {
+  --background: #f8f9fa;
+  padding: 16px;
 }
 
-/* Tab aktif */
-ion-tab-button.ion-selected {
-  color: #4CAF70;
+.custom-header ion-title {
+  margin-top: 2px; /* dorong judul ke bawah */
+}
+/* Card Pengumuman */
+.announcement-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.announcement-card:hover {
+  transform: translateY(-3px);
+}
+
+.announcement-card h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2e7d32;
+  margin-bottom: 6px;
+}
+
+.announcement-card p {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.announcement-date {
+  font-size: 12px;
+  color: #888;
+  display: block;
+  text-align: right;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  margin-top: 40%;
+  color: #888;
+
+  ion-icon {
+    font-size: 50px;
+    margin-bottom: 12px;
+    color: #bbb;
+  }
+
+  .announcement-card {
+  background: #fff;
+  padding: 12px;
+  margin: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+/* efek saat ditekan lama */
+.announcement-card:active {
+  transform: scale(0.97);
+  background: #fef2f2;
+}
+  p {
+    font-size: 16px;
+  }
 }

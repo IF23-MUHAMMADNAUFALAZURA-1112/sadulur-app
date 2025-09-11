@@ -1,91 +1,178 @@
+<ion-content>
+  <div class="page-wrapper">
+    <!-- 🔥 Bagian Header Hijau -->
+    <div class="top-section">
+      <div class="header-content">
+        <div>
+          <h1>Hi Dulur!</h1>
+          <p>Akses info terbaru, kirim laporan, dan kelola data warga Anda langsung dari sini.</p>
+        </div>
 
-<ion-content [fullscreen]="true">
-  <!-- Bagian Header Hijau -->
-  <div class="top-section">
-    <div class="header-content">
-      <div>
-        <h1>Hi Dulur!</h1>
-        <p>Akses info terbaru, kirim laporan, dan kelola data warga Anda langsung dari sini.</p>
+        <!-- Avatar Profile -->
+        <ion-avatar class="profile-avatar" (click)="openPopover($event)">
+          <img src="assets/img/default-profile.png" alt="Foto profil pengguna" />
+        </ion-avatar>
       </div>
-     
-    <!-- Avatar Profile -->
-   <!-- Avatar Profile -->
-<ion-avatar class="profile-avatar" (click)="openPopover($event)">
-  <img src="assets/img/default-profile.png" alt="Foto profil pengguna" />
-</ion-avatar>
+    </div>
 
-  </div>
-</div>
+    <!-- 🔥 Popover -->
+    <ion-popover
+      [isOpen]="isPopoverOpen"
+      [event]="popoverEvent"
+      (didDismiss)="isPopoverOpen = false"
+      cssClass="custom-popover"
+    >
+      <ng-template>
+        <ion-list>
+          <ion-item button (click)="goToProfile()">
+            <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+            <ion-label>Lihat Profil</ion-label>
+          </ion-item>
+          <ion-item button (click)="logout()">
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            <ion-label>Logout</ion-label>
+          </ion-item>
+        </ion-list>
+      </ng-template>
+    </ion-popover>
 
- <!-- Popover -->
-<ion-popover
-  [isOpen]="isPopoverOpen"
-  [event]="popoverEvent"
-  (didDismiss)="isPopoverOpen = false"
-  cssClass="custom-popover"
->
-  <ng-template>
-    <ion-list>
-      <ion-item button (click)="goToProfile()">
-        <ion-icon slot="start" name="person-circle-outline"></ion-icon>
-        <ion-label>Lihat Profil</ion-label>
-      </ion-item>
-      <ion-item button (click)="logout()">
-        <ion-icon slot="start" name="log-out-outline"></ion-icon>
-        <ion-label>Logout</ion-label>
-      </ion-item>
-    </ion-list>
-  </ng-template>
-</ion-popover>
+    <!-- 🔥 Judul -->
+    <div class="section-title">
+      <h2>Sadulur Application</h2>
+    </div>
 
-  <!-- Shortcut -->
-  <div class="shortcut-section">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="6">
-          <!-- ion-card button sudah punya nama aksesibel dari judul di dalam card -->
-          <ion-card button>
-            <!-- Dekoratif: kosongkan alt agar diabaikan screen reader -->
-            <img src="assets/img/pengumuman.jpg" alt="" />
+    <!-- 🔥 Banner scroll horizontal -->
+    <div class="long-section horizontal-scroll">
+      <ion-card>
+        <img src="assets/img/1.png" alt="" />
+      </ion-card>
+      <ion-card>
+        <img src="assets/img/2.png" alt="" />
+      </ion-card>
+      <ion-card>
+        <img src="assets/img/3.png" alt="" />
+      </ion-card>
+    </div>
+
+    <!-- 🔥 Menu Utama -->
+    <div class="section-title">
+      <h2>Menu Utama</h2>
+    </div>
+
+    <div class="shortcut-section">
+      <div class="shortcut-scroll">
+        <ion-card button>
+          <img src="assets/img/pengumuman.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-title>LIHAT PENGUMUMAN</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Dapatkan info terbaru dari lingkungan Anda secara realtime.
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card button>
+          <img src="assets/img/laporan.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-title>BUAT LAPORAN</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Sampaikan keluhan atau laporan kejadian secara cepat dan mudah.
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card button>
+          <img src="assets/img/laporan.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-title>KONTAK DARURAT</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Hubungi layanan darurat langsung dari aplikasi ini.
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+
+    <!-- 🔥 Program Section -->
+    <div class="section-title">
+      <h2>Berbagai Program</h2>
+    </div>
+
+    <div class="program-section">
+      <!-- E-learning -->
+      <ion-card class="program-card">
+        <div class="program-inner">
+          <div class="icon-box">
+            <img src="assets/img/elearning.png" alt="E-learning" />
+          </div>
+          <div class="content-box">
             <ion-card-header>
-              <ion-card-title>LIHAT PENGUMUMAN</ion-card-title>
+              <ion-card-title>E-learning</ion-card-title>
+              <ion-card-subtitle>
+                Pelajari Ratusan Skill Sekali Bayar. Praktik dan Bersertifikat
+              </ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
-              Dapatkan info terbaru dari lingkungan Anda secara realtime.
+              <ul>
+                <li>Belajar fleksibel via Video Materi, Bahan Bacaan, Project dan Studi Kasus</li>
+                <li>Praktikal & Actionable. Dari level Dasar hingga Lanjut</li>
+                <li>Grup Komunitas Diskusi Lifetime. Kelas Gratis Tiap Bulannya</li>
+              </ul>
+              <ion-button size="small" color="success">Lihat Ratusan Materi</ion-button>
             </ion-card-content>
-          </ion-card>
-        </ion-col>
+          </div>
+        </div>
+      </ion-card>
 
-        <ion-col size="6">
-          <ion-card button>
-            <img src="assets/img/laporan.jpg" alt="" />
+      <!-- Bootcamp -->
+      <ion-card class="program-card">
+        <div class="program-inner">
+          <div class="icon-box">
+            <img src="assets/img/bootcamp.png" alt="Bootcamp" />
+          </div>
+          <div class="content-box">
             <ion-card-header>
-              <ion-card-title>BUAT LAPORAN</ion-card-title>
+              <ion-card-title>Bootcamp</ion-card-title>
+              <ion-card-subtitle>
+                Intensive Live Class bersama Experts. Praktikal & Mendalam
+              </ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
-              Sampaikan keluhan atau laporan kejadian secara cepat dan mudah.
+              <ul>
+                <li>Kombinasi Case Study, Diskusi, Praktik tiap sesi. Basic → Advanced</li>
+                <li>Group Mentoring Semi-Privat untuk Bangun Portfolio</li>
+                <li>Tutor berpengalaman. Alumni 30.000+</li>
+              </ul>
+              <ion-button size="small" color="success">Lihat Ragam Bootcamp</ion-button>
             </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+          </div>
+        </div>
+      </ion-card>
 
-  <!-- Konten panjang (scrollable) -->
-  <div class="long-section">
-    <!-- Jika ketiga gambar hanya hiasan/banner, gunakan alt kosong -->
-    <ion-card>
-      <img src="assets/img/1.png" alt="" />
-    </ion-card>
-    <ion-card>
-      <img src="assets/img/2.png" alt="" />
-    </ion-card>
-    <ion-card>
-      <img src="assets/img/3.png" alt="" />
-    </ion-card>
+      <!-- Review CV -->
+      <ion-card class="program-card">
+        <div class="program-inner">
+          <div class="icon-box">
+            <img src="assets/img/laporan.jpg" alt="Review CV" />
+          </div>
+          <div class="content-box">
+            <ion-card-header>
+              <ion-card-title>Review CV</ion-card-title>
+              <ion-card-subtitle>
+                Dapatkan review & dokumen persiapan karir dari HRD
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ul>
+                <li>Dapatkan 20+ Template CV, surat lamaran, dll</li>
+                <li>Dokumen QnA Wawancara & optimasi LinkedIn</li>
+                <li>Tingkat peluang diterima kerja/magang dengan review HRD</li>
+              </ul>
+              <ion-button size="small" color="success">Review CV</ion-button>
+            </ion-card-content>
+          </div>
+        </div>
+      </ion-card>
+    </div>
   </div>
 </ion-content>
-
-
-
-

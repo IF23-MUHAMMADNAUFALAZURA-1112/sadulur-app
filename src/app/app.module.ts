@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';  // Cukup satu kali impor IonicModule
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,14 +13,15 @@ import { LaporanPage } from './laporan/laporan.page';
 @NgModule({
   declarations: [
     AppComponent,
- 
-    // Hapus BtnNavigationbarComponent dari sini
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      animated: false   // 🔥 Nonaktifkan animasi slide
+    }),
     AppRoutingModule,
-    BtnNavigationbarComponent,  // Impor komponen standalone di sini
+    HammerModule,             // ✅ tambahkan ini
+    BtnNavigationbarComponent // Standalone component
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

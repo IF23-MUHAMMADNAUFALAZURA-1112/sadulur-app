@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 /* 🌿 Background utama */
 .login-bg {
   --background: #ffffff;
@@ -24,8 +26,6 @@
   box-shadow: 0 -4px 12px rgba(0,0,0,0.1);  
   overflow: hidden ;
 
- 
-
   ion-item {
     border-radius: 12px;
     margin-bottom: 14px;
@@ -36,11 +36,8 @@
   }
 
   ion-icon {
-    color: #4caf70;
+    color: #fafafa;
   }
-
-
-
 }
 
 /* 🌿 Tombol back */
@@ -49,18 +46,18 @@
 }
 
 .back-btn {
-  background: rgba(194, 226, 206, 0.8);
+  background: linear-gradient(135deg, #6bcf91, #4caf70);
   padding: 12px;
   border-radius: 50%;
   font-size: 22px;
-  color: #2e3d2c;
+  color: #fff; /* ikon panah jadi putih biar kontras */
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   transition: transform 0.2s ease;
 }
 
 .back-btn:hover {
   transform: scale(1.1);
-  background: #9fcab0;
+  opacity: 0.9;
 }
 
 /* 🌿 Header */
@@ -93,7 +90,9 @@
 
 .profile-icon ion-icon {
   font-size: 120px;
-  color: #000;
+  background: linear-gradient(135deg, #6bcf91, #4caf70);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* gradient ke icon */
   filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
   transition: transform 0.3s ease;
 }
@@ -144,7 +143,6 @@
   margin-top: 20px;
   color: #333;
 }
-
 
 /* 🌿 Responsive */
 @media screen and (min-width: 768px) {

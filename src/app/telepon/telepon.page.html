@@ -1,81 +1,38 @@
-
-
-<ion-header [translucent]="true">
-  <ion-toolbar color="light">
-    <ion-title>SADULUR</ion-title>
+<ion-header class="no-border">
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>KONTAK DARURAT</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <!-- 🔥 Bagian Header Hijau -->
+<ion-content>
+  <!-- Bagian Header Hijau dengan wave -->
   <div class="top-section-darurat">
     <h1 class="darurat-title">KONTAK DARURAT</h1>
   </div>
 
-  <!-- 🔥 Foto telepon bulat -->
+  <!-- Foto telepon hero -->
   <div class="darurat-hero">
-    <img src="assets/img/kontak.png" alt="Telepon" />
+    <img src="assets/icon/telepon.png" alt="Telepon Darurat">
   </div>
 
-  <!-- 🔥 Kotak daftar kontak scrollable -->
-  <ion-card class="scroll-card">
-    <div class="list-scroll">
-      <ion-list lines="none">
-       <ion-list lines="none">
-  <ion-item class="contact">
-    <ion-label><h2>Polisi</h2></ion-label>
-    <span class="number copyable">110</span>
-  </ion-item>
+ <!-- Kotak daftar kontak -->
+<div class="scroll-card">
+  <div class="list-scroll">
+    <ion-item class="contact" *ngFor="let kontak of kontakList">
+      <ion-icon slot="start" name="call-outline" color="success"></ion-icon>
+      <ion-label>
+        <h2>{{ kontak.nama }}</h2>
+        <p class="number copyable">{{ kontak.nomor }}</p>
+      </ion-label>
 
-  <ion-item class="contact">
-    <ion-label><h2>Ambulans</h2></ion-label>
-    <span class="number copyable">118</span>
-  </ion-item>
+      <ion-buttons slot="end">
+        <!-- Tombol Salin -->
+        <ion-button fill="clear" color="medium" (click)="copyNumber(kontak.nomor)">
+          <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </div>
+</div>
 
-  <ion-item class="contact">
-    <ion-label><h2>Damkar</h2></ion-label>
-    <span class="number copyable">113</span>
-  </ion-item>
-
-  <ion-item class="contact">
-    <ion-label><h2>SAR Nasional (BASARNAS)</h2></ion-label>
-    <span class="number copyable">115</span>
-  </ion-item>
-
-  <ion-item class="contact">
-    <ion-label><h2>Palang Merah Indonesia</h2></ion-label>
-    <span class="number copyable">(021) 7992325</span>
-  </ion-item>
-
-  <ion-item class="contact">
-    <ion-label><h2>BNPB (Bencana)</h2></ion-label>
-    <span class="number copyable">117</span>
-  </ion-item>
-
-  <ion-item class="contact">
-    <ion-label><h2>Konseling Kesehatan Jiwa (Kemenkes)</h2></ion-label>
-    <span class="number copyable">119 ext 8</span>
-  </ion-item>
-
-  <ion-item class="contact">
-    <ion-label><h2>Layanan Darurat Nasional</h2></ion-label>
-    <span class="number copyable">112</span>
-  </ion-item>
-
-  <!-- 🔥 Contoh Kontak RT/RW -->
-  <ion-item class="contact">
-    <ion-label><h2>Ketua RT 01</h2></ion-label>
-    <span class="number copyable">0812-3456-7890</span>
-  </ion-item>
-
-  <ion-item class="contact">
-    <ion-label><h2>Ketua RW 05</h2></ion-label>
-    <span class="number copyable">0821-9876-5432</span>
-  </ion-item>
-</ion-list>
-      </ion-list>
-    </div>
-  </ion-card>
 </ion-content>
-
-
