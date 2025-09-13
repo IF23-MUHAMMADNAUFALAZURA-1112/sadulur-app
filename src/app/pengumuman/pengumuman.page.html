@@ -1,6 +1,16 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="custom-header">
     <ion-title>PENGUMUMAN</ion-title>
+
+    <!-- 🔹 Tombol saat mode pilih aktif -->
+    <ion-buttons slot="end" *ngIf="isSelectionMode">
+      <ion-button (click)="deleteSelected()" color="danger">
+        Hapus Terpilih
+      </ion-button>
+      <ion-button (click)="cancelSelection()">
+        Batal
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,17 +23,30 @@
   </div>
 
   <!-- Daftar pengumuman -->
-<div *ngFor="let item of announcements; let i = index" 
-     class="announcement-card"
-     (mousedown)="startPress(i)" 
-     (mouseup)="endPress()" 
-     (mouseleave)="endPress()"
-     (touchstart)="startPress(i)" 
-     (touchend)="endPress()">
-  <h2>{{ item.title }}</h2>
-  <p>{{ item.message }}</p>
-  <span class="announcement-date">{{ item.date | date:'dd MMM yyyy, HH:mm' }}</span>
-</div>
+  <div *ngFor="let item of announcements; let i = index"
+       class="announcement-card"
+       (mousedown)="startPress(i)"
+       (mouseup)="endPress()"
+       (mouseleave)="endPress()"
+       (touchstart)="startPress(i)"
+       (touchend)="endPress()">
 
+    <ion-item lines="none">
+      <!-- 🔹 Checkbox muncul kalau mode pilih aktif -->
+      <ion-checkbox *ngIf="isSelectionMode"
+                    slot="start"
+                    [(ngModel)]="selectedItems[i]"
+                    (ionChange)="onSelectChange()">
+      </ion-checkbox>
+
+      <ion-label>
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.message }}</p>
+        <span class="announcement-date">
+          {{ item.date | date:'dd MMM yyyy, HH:mm' }}
+        </span>
+      </ion-label>
+    </ion-item>
+  </div>
 
 </ion-content>

@@ -12,27 +12,36 @@
 
   <!-- Foto telepon hero -->
   <div class="darurat-hero">
-    <img src="assets/icon/telepon.png" alt="Telepon Darurat">
+    <img src="assets/img/darurat.png" alt="Telepon Darurat">
   </div>
 
- <!-- Kotak daftar kontak -->
-<div class="scroll-card">
-  <div class="list-scroll">
-    <ion-item class="contact" *ngFor="let kontak of kontakList">
-      <ion-icon slot="start" name="call-outline" color="success"></ion-icon>
-      <ion-label>
-        <h2>{{ kontak.nama }}</h2>
-        <p class="number copyable">{{ kontak.nomor }}</p>
-      </ion-label>
+  <!-- Kotak daftar kontak -->
+  <div class="scroll-card">
+    <div class="list-scroll">
+      <ion-item 
+        class="contact" 
+        *ngFor="let kontak of kontakList" 
+        [href]="getContactHref(kontak)" 
+        target="_system">
 
-      <ion-buttons slot="end">
-        <!-- Tombol Salin -->
-        <ion-button fill="clear" color="medium" (click)="copyNumber(kontak.nomor)">
-          <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-item>
+        <ion-icon slot="start" 
+                  [name]="kontak.type === 'wa' ? 'logo-whatsapp' : 'call-outline'" 
+                  color="success">
+        </ion-icon>
+
+        <ion-label>
+          <h2>{{ kontak.nama }}</h2>
+          <p class="number copyable">{{ kontak.nomor }}</p>
+        </ion-label>
+
+        <ion-buttons slot="end">
+          <!-- Tombol Salin -->
+          <ion-button fill="clear" color="medium" (click)="copyNumber(kontak.nomor)">
+            <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+
+      </ion-item>
+    </div>
   </div>
-</div>
-
 </ion-content>

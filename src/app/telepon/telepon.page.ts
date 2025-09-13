@@ -5,6 +5,7 @@ interface KontakDarurat {
   id: number;
   nama: string;
   nomor: string;
+  type?: 'tel' | 'wa'; // 🔥 tambahkan type
 }
 
 @Component({
@@ -16,16 +17,16 @@ interface KontakDarurat {
 export class TeleponPage implements OnInit {
 
   kontakList: KontakDarurat[] = [
-    { id: 1, nama: 'Polisi', nomor: '110' },
-    { id: 2, nama: 'Ambulans', nomor: '118' },
-    { id: 3, nama: 'Damkar', nomor: '113' },
-    { id: 4, nama: 'SAR Nasional (BASARNAS)', nomor: '115' },
-    { id: 5, nama: 'Palang Merah Indonesia', nomor: '(021) 7992325' },
-    { id: 6, nama: 'BNPB (Bencana)', nomor: '117' },
-    { id: 7, nama: 'Konseling Kesehatan Jiwa (Kemenkes)', nomor: '119 ext 8' },
-    { id: 8, nama: 'Layanan Darurat Nasional', nomor: '112' },
-    { id: 9, nama: 'Ketua RT 01', nomor: '0812-3456-7890' },
-    { id: 10, nama: 'Ketua RW 05', nomor: '0821-9876-5432' }
+    { id: 1, nama: 'Polisi', nomor: '110', type: 'tel' },
+    { id: 2, nama: 'Ambulans', nomor: '118', type: 'tel' },
+    { id: 3, nama: 'Damkar', nomor: '113', type: 'tel' },
+    { id: 4, nama: 'SAR Nasional (BASARNAS)', nomor: '115', type: 'tel' },
+    { id: 5, nama: 'Palang Merah Indonesia', nomor: '(021) 7992325', type: 'tel' },
+    { id: 6, nama: 'BNPB (Bencana)', nomor: '117', type: 'tel' },
+    { id: 7, nama: 'Konseling Kesehatan Jiwa (Kemenkes)', nomor: '119 ext 8', type: 'tel' },
+    { id: 8, nama: 'Layanan Darurat Nasional', nomor: '112', type: 'tel' },
+    { id: 9, nama: 'Ketua RT 01', nomor: '081234567890', type: 'wa' },
+    { id: 10, nama: 'Ketua RW 05', nomor: '082198765432', type: 'wa' }
   ];
 
   constructor(private toastCtrl: ToastController) {}
@@ -48,5 +49,13 @@ export class TeleponPage implements OnInit {
     } catch (err) {
       console.error('Gagal menyalin nomor:', err);
     }
+  }
+
+  // 🔥 helper untuk generate href sesuai type
+  getContactHref(kontak: KontakDarurat): string {
+    if (kontak.type === 'wa') {
+      return 'https://wa.me/' + kontak.nomor.replace(/[^0-9]/g, '');
+    }
+    return 'tel:' + kontak.nomor;
   }
 }

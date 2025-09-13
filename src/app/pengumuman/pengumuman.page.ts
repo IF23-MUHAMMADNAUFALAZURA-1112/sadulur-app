@@ -1,81 +1,137 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 
+interface Announcement {
+  title: string;
+  message: string;
+  date: string; // ISO string
+}
+
 @Component({
   selector: 'app-pengumuman',
   templateUrl: './pengumuman.page.html',
   styleUrls: ['./pengumuman.page.scss'],
-  standalone: false,
+  standalone: false
 })
 export class PengumumanPage implements OnInit {
-  // 🔹 Array untuk menampung pengumuman
-  announcements: any[] = [];
-  private pressTimer: any; // ⏱️ simpan timer long press
+  announcements: Announcement[] = [];
+  selectedItems: number[] = [];
+  isSelectionMode = false;
+  private pressTimer: any;
 
-  constructor(
-    private navCtrl: NavController,
-    private alertCtrl: AlertController
-  ) {}
+  constructor(private navCtrl: NavController, private alertCtrl: AlertController) {}
+
+  ngOnInit() {
+    this.loadAnnouncements();
+    // cek pengumuman baru dari localStorage (misal dari ProfilePage)
+    this.checkProfileUpdateNotif();
+    // polling tiap 2 detik supaya realtime tanpa reload
+    setInterval(() => this.checkProfileUpdateNotif(), 2000);
+  }
 
   goBack() {
     this.navCtrl.navigateBack('/dashboard');
-    // atau: this.navCtrl.back();
   }
 
-  ngOnInit() {
-    // 🔹 Contoh data dummy (nanti diganti API Laravel)
-    this.announcements = [
-      {
-        title: 'Kegiatan Gotong Royong',
-        message: 'Besok ada kegiatan gotong royong di balai desa jam 07.00 WIB.',
-        date: new Date()
-      },
-      {
-        title: 'Update Sistem',
-        message: 'Sistem akan diperbarui malam ini jam 23.00 WIB.',
-        date: new Date('2025-09-06T23:00:00')
-      }
-    ];
+  private loadAnnouncements() {
+    const stored = localStorage.getItem('pengumuman');
+    if (stored) {
+      this.announcements = JSON.parse(stored);
+      // urutkan berdasarkan tanggal terbaru
+      this.announcements.sort((a, b) => (a.date < b.date ? 1 : -1));
+    }
   }
 
-  // 🔹 Saat mulai tekan (mousedown/touchstart)
+  private checkProfileUpdateNotif() {
+    const notif = localStorage.getItem('profileUpdatedNotif');
+    if (notif) {
+      const newAnn: Announcement = JSON.parse(notif);
+      // tambahkan di paling atas
+      this.announcements.unshift(newAnn);
+      localStorage.removeItem('profileUpdatedNotif'); // hapus supaya tidak dobel
+      this.saveAnnouncementsToStorage();
+    }
+  }
+
+  private saveAnnouncementsToStorage() {
+    localStorage.setItem('pengumuman', JSON.stringify(this.announcements));
+  }
+
+  enableSelectionMode() {
+    this.isSelectionMode = true;
+  }
+
+  cancelSelection() {
+    this.isSelectionMode = false;
+    this.selectedItems = [];
+  }
+
+  onSelectChange() {
+    console.log('Selected items:', this.selectedItems);
+  }
+
+  removeOldAnnouncements() {
+    const now = new Date().getTime();
+    this.announcements = this.announcements.filter(item => {
+      const diff = (now - new Date(item.date).getTime()) / (1000 * 3600 * 24);
+      return diff <= 3;
+    });
+    this.saveAnnouncementsToStorage();
+  }
+
   startPress(index: number) {
     this.pressTimer = setTimeout(() => {
-      this.confirmDelete(index);
-    }, 600); // 600ms dianggap long press
+      this.enableSelectionMode();
+      if (!this.selectedItems.includes(index)) {
+        this.selectedItems.push(index);
+      }
+    }, 600);
   }
 
-  // 🔹 Saat lepas tekan (mouseup/touchend/mouseleave)
   endPress() {
     clearTimeout(this.pressTimer);
   }
 
-  // 🔹 Munculkan popup konfirmasi hapus
   async confirmDelete(index: number) {
     const alert = await this.alertCtrl.create({
       header: 'Hapus Pengumuman',
       message: 'Apakah Anda yakin ingin menghapus pengumuman ini?',
       buttons: [
-        {
-          text: 'Batal',
-          role: 'cancel'
-        },
+        { text: 'Batal', role: 'cancel' },
         {
           text: 'Hapus',
           role: 'destructive',
-          handler: () => {
-            this.deleteAnnouncement(index);
-          }
-        }
-      ]
+          handler: () => this.deleteAnnouncement(index),
+        },
+      ],
     });
-
     await alert.present();
   }
 
-  // 🔹 Hapus pengumuman dari array
-  deleteAnnouncement(index: number) {
+  async deleteAnnouncement(index: number) {
     this.announcements.splice(index, 1);
+    this.saveAnnouncementsToStorage();
+    const alert = await this.alertCtrl.create({
+      header: 'Berhasil',
+      message: 'Pengumuman telah dihapus',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async deleteSelected() {
+    this.announcements = this.announcements.filter(
+      (_, idx) => !this.selectedItems.includes(idx)
+    );
+    this.selectedItems = [];
+    this.isSelectionMode = false;
+    this.saveAnnouncementsToStorage();
+
+    const alert = await this.alertCtrl.create({
+      header: 'Berhasil',
+      message: 'Pengumuman terpilih telah dihapus',
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 }
-gi

@@ -4,13 +4,14 @@
     <div class="top-section">
       <div class="header-content">
         <div>
-          <h1>Hi Dulur!</h1>
+          <!-- Menampilkan nama user dengan fallback 'Dulur' -->
+          <h1>Hi, {{ user.nama || 'Dulur' }}!</h1>
           <p>Akses info terbaru, kirim laporan, dan kelola data warga Anda langsung dari sini.</p>
         </div>
 
         <!-- Avatar Profile -->
         <ion-avatar class="profile-avatar" (click)="openPopover($event)">
-          <img src="assets/img/default-profile.png" alt="Foto profil pengguna" />
+          <img [src]="user.foto || 'assets/img/default-profile.png'" alt="Foto profil pengguna" />
         </ion-avatar>
       </div>
     </div>
@@ -26,7 +27,7 @@
         <ion-list>
           <ion-item button (click)="goToProfile()">
             <ion-icon slot="start" name="person-circle-outline"></ion-icon>
-            <ion-label>Lihat Profil</ion-label>
+            <ion-label>{{ user.nama || 'Pengguna' }}</ion-label>
           </ion-item>
           <ion-item button (click)="logout()">
             <ion-icon slot="start" name="log-out-outline"></ion-icon>
@@ -43,15 +44,9 @@
 
     <!-- 🔥 Banner scroll horizontal -->
     <div class="long-section horizontal-scroll">
-      <ion-card>
-        <img src="assets/img/1.png" alt="" />
-      </ion-card>
-      <ion-card>
-        <img src="assets/img/2.png" alt="" />
-      </ion-card>
-      <ion-card>
-        <img src="assets/img/3.png" alt="" />
-      </ion-card>
+      <ion-card><img src="assets/img/1.png" alt="" /></ion-card>
+      <ion-card><img src="assets/img/2.png" alt="" /></ion-card>
+      <ion-card><img src="assets/img/3.png" alt="" /></ion-card>
     </div>
 
     <!-- 🔥 Menu Utama -->
@@ -66,29 +61,23 @@
           <ion-card-header>
             <ion-card-title>LIHAT PENGUMUMAN</ion-card-title>
           </ion-card-header>
-          <ion-card-content>
-            Dapatkan info terbaru dari lingkungan Anda secara realtime.
-          </ion-card-content>
+          <ion-card-content>Dapatkan info terbaru dari lingkungan Anda secara realtime.</ion-card-content>
         </ion-card>
 
         <ion-card button>
-          <img src="assets/img/laporan.jpg" alt="" />
+          <img src="assets/img/dokument.png" alt="" />
           <ion-card-header>
             <ion-card-title>BUAT LAPORAN</ion-card-title>
           </ion-card-header>
-          <ion-card-content>
-            Sampaikan keluhan atau laporan kejadian secara cepat dan mudah.
-          </ion-card-content>
+          <ion-card-content>Sampaikan keluhan atau laporan kejadian secara cepat dan mudah.</ion-card-content>
         </ion-card>
 
         <ion-card button>
-          <img src="assets/img/laporan.jpg" alt="" />
+          <img src="assets/img/alert.png" alt="" />
           <ion-card-header>
             <ion-card-title>KONTAK DARURAT</ion-card-title>
           </ion-card-header>
-          <ion-card-content>
-            Hubungi layanan darurat langsung dari aplikasi ini.
-          </ion-card-content>
+          <ion-card-content>Hubungi layanan darurat langsung dari aplikasi ini.</ion-card-content>
         </ion-card>
       </div>
     </div>
@@ -99,76 +88,71 @@
     </div>
 
     <div class="program-section">
-      <!-- E-learning -->
+      <!-- Laporan -->
       <ion-card class="program-card">
         <div class="program-inner">
           <div class="icon-box">
-            <img src="assets/img/elearning.png" alt="E-learning" />
+            <img src="assets/img/dokument.png" alt="E-learning" />
           </div>
           <div class="content-box">
             <ion-card-header>
-              <ion-card-title>E-learning</ion-card-title>
-              <ion-card-subtitle>
-                Pelajari Ratusan Skill Sekali Bayar. Praktik dan Bersertifikat
-              </ion-card-subtitle>
+              <ion-card-title>Ajukan Laporan</ion-card-title>
+              <ion-card-subtitle>Sampaikan keluhan, aspirasi, atau laporan gangguan dengan mudah</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
               <ul>
-                <li>Belajar fleksibel via Video Materi, Bahan Bacaan, Project dan Studi Kasus</li>
-                <li>Praktikal & Actionable. Dari level Dasar hingga Lanjut</li>
-                <li>Grup Komunitas Diskusi Lifetime. Kelas Gratis Tiap Bulannya</li>
+                <li>Pilih jenis laporan: Keluhan, Aspirasi, atau Gangguan</li>
+                <li>Tulis deskripsi masalah atau saran dengan jelas</li>
+                <li>Kirim laporan untuk segera ditindaklanjuti</li>
               </ul>
-              <ion-button size="small" color="success">Lihat Ratusan Materi</ion-button>
+              <ion-button size="small" color="success" [routerLink]="['/laporan']">Buat Laporan</ion-button>
             </ion-card-content>
           </div>
         </div>
       </ion-card>
 
-      <!-- Bootcamp -->
+      <!-- Pengumuman -->
       <ion-card class="program-card">
         <div class="program-inner">
           <div class="icon-box">
-            <img src="assets/img/bootcamp.png" alt="Bootcamp" />
+            <img src="assets/img/alert.png" alt="Pengumuman" />
           </div>
           <div class="content-box">
             <ion-card-header>
-              <ion-card-title>Bootcamp</ion-card-title>
-              <ion-card-subtitle>
-                Intensive Live Class bersama Experts. Praktikal & Mendalam
-              </ion-card-subtitle>
+              <ion-card-title>Pengumuman</ion-card-title>
+              <ion-card-subtitle>Informasi terbaru dan feedback dari admin terkait laporan Anda</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
               <ul>
-                <li>Kombinasi Case Study, Diskusi, Praktik tiap sesi. Basic → Advanced</li>
-                <li>Group Mentoring Semi-Privat untuk Bangun Portfolio</li>
-                <li>Tutor berpengalaman. Alumni 30.000+</li>
+                <li>Lihat status laporan Anda: diterima, diproses, atau selesai</li>
+                <li>Dapatkan pemberitahuan resmi dari admin mengenai tindak lanjut</li>
+                <li>Informasi umum atau pengumuman penting juga ditampilkan di sini</li>
               </ul>
-              <ion-button size="small" color="success">Lihat Ragam Bootcamp</ion-button>
+              <ion-button size="small" color="success" [routerLink]="['/pengumuman']">Lihat Pengumuman</ion-button>
             </ion-card-content>
           </div>
         </div>
       </ion-card>
 
-      <!-- Review CV -->
+      <!-- Telepon Darurat -->
       <ion-card class="program-card">
         <div class="program-inner">
           <div class="icon-box">
-            <img src="assets/img/laporan.jpg" alt="Review CV" />
+            <img src="assets/img/telepon.jpg" alt="Telepon Darurat" />
           </div>
           <div class="content-box">
             <ion-card-header>
-              <ion-card-title>Review CV</ion-card-title>
-              <ion-card-subtitle>
-                Dapatkan review & dokumen persiapan karir dari HRD
-              </ion-card-subtitle>
+              <ion-card-title>Telepon Darurat</ion-card-title>
+              <ion-card-subtitle>Hubungi layanan darurat dengan cepat dan mudah</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
               <ul>
-                <li>Dapatkan 20+ Template CV, surat lamaran, dll</li>
-                <li>Dokumen QnA Wawancara & optimasi LinkedIn</li>
-                <li>Tingkat peluang diterima kerja/magang dengan review HRD</li>
+                <li>Polisi: 110</li>
+                <li>Pemadam Kebakaran: 113</li>
+                <li>Ambulans / Rumah Sakit: 118 / 119</li>
+                <li>Kontak Admin / Helpdesk aplikasi</li>
               </ul>
-              <ion-button size="small" color="success">Review CV</ion-button>
+              <ion-button size="small" color="success" [routerLink]="['/telepon']">Hubungi Sekarang</ion-button>
             </ion-card-content>
           </div>
         </div>

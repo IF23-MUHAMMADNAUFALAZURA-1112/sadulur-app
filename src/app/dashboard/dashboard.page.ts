@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController, ToastController, PopoverController } from '@ionic/angular';
+
+interface CurrentUser {
+  nama: string;
+  foto?: string;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +12,11 @@ import { NavController, AlertController, ToastController, PopoverController } fr
   styleUrls: ['./dashboard.page.scss'],
   standalone: false
 })
-export class DashboardPage {
+export class DashboardPage implements OnInit {
   isPopoverOpen = false;
   popoverEvent: any;
+
+  user: CurrentUser = { nama: 'Dulur', foto: 'assets/img/default-profile.png' };
 
   constructor(
     private navCtrl: NavController,
@@ -18,6 +25,17 @@ export class DashboardPage {
     private popoverCtrl: PopoverController
   ) {}
 
+  ngOnInit() {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      const parsed = JSON.parse(storedUser) as CurrentUser;
+      this.user = {
+        nama: parsed.nama || 'Dulur',
+        foto: parsed.foto || 'assets/img/default-profile.png'
+      };
+    }
+  }
+
   openPopover(ev: any) {
     this.popoverEvent = ev;
     this.isPopoverOpen = true;
@@ -25,29 +43,23 @@ export class DashboardPage {
 
   async goToProfile() {
     this.isPopoverOpen = false;
-    await this.popoverCtrl.dismiss();   // ✅ pastikan popover tertutup
+    await this.popoverCtrl.dismiss();
     this.navCtrl.navigateForward('/profile');
   }
 
   async logout() {
     this.isPopoverOpen = false;
-    await this.popoverCtrl.dismiss();   // ✅ tutup popover dulu
+    await this.popoverCtrl.dismiss();
 
     const alert = await this.alertCtrl.create({
       header: 'Konfirmasi',
       message: 'Apakah Anda yakin ingin logout?',
       buttons: [
-        {
-          text: 'Batal',
-          role: 'cancel',
-          cssClass: 'secondary'
-        },
+        { text: 'Batal', role: 'cancel', cssClass: 'secondary' },
         {
           text: 'Ya, Logout',
           handler: async () => {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-
+            localStorage.removeItem('currentUser');
             const toast = await this.toastCtrl.create({
               message: 'Logout berhasil',
               duration: 2000,
@@ -55,7 +67,6 @@ export class DashboardPage {
               color: 'success'
             });
             await toast.present();
-
             this.navCtrl.navigateRoot('/login');
           }
         }

@@ -7,13 +7,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between; /* back kiri, key kanan */
-  z-index: 10; /* pastikan di atas background hijau */
+  z-index: 10;
   color: #fff;
 }
 
-/* tombol back bulat (pakai gaya yang sudah kamu punya) */
+/* tombol back bulat */
 .back-btn {
-  background: rgb(255, 255, 255);
+  background: rgba(194, 226, 206, 0.8);
   padding: 12px;
   border-radius: 50%;
   font-size: 22px;
@@ -21,7 +21,10 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   transition: transform 0.2s ease;
 }
-.back-btn:hover { transform: scale(1.1); background: #fff; }
+.back-btn:hover {
+  transform: scale(1.1);
+  background: #9fcab0;
+}
 
 /* tombol key bulat di kanan */
 .key-btn {
@@ -32,32 +35,10 @@
   border-radius: 50%;
 }
 
-/* 🌿 Tombol back */
-.back-wrapper {
-  position: fixed;  /* 🔥 selalu menempel di layar */
-  top: 16px;        /* jarak dari atas */
-  left: 16px;       /* jarak dari kiri */
-  z-index: 9999;    /* biar paling atas */
-}
-
-.back-btn {
-  background: rgba(194, 226, 206, 0.8);
-  padding: 12px;
-  border-radius: 50%;
-  font-size: 22px;
-  color: #2e3d2c;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transition: transform 0.2s ease;
-}
-
-.back-btn:hover {
-  transform: scale(1.1);
-  background: #9fcab0;
-}
-
+/* 🌟 Bagian atas profil */
 .profile-top {
-  background: #a8d5b9;
-  padding: 50px 20px 30px; /* 🔥 atas dibikin lebih tinggi */
+  background: linear-gradient(135deg, #6bcf91, #4caf70);
+  padding: 50px 20px 30px;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
 }
@@ -67,18 +48,43 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
-  margin-top: 10px; /* 🔥 dorong turun */
+  margin-top: 10px;
 }
 
+/* 🌟 Foto Profil */
 .profile-photo {
-  width: 100px;
-  height: 100px;
-  border: none;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;       /* bulat */
+  overflow: hidden;         /* rapikan lingkaran */
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.profile-photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;              /* ✅ kasih background solid */
+  border: 3px solid #fff;        /* ✅ tambahkan border putih supaya pisahkan dari hijau */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* ✅ shadow lembut, bukan hijau */
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-photo:hover {
+  transform: scale(1.05);
 }
 
 .profile-nik-side {
   text-align: left;
-  margin-top: 8px; /* 🔥 biar teks agak turun sejajar foto */
+  margin-top: 8px;
 }
 .profile-name {
   margin: 0;
@@ -101,7 +107,6 @@
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
 }
 
-/* Input dengan kotak */
 .input-box {
   --background: #f9f9f9;
   margin-bottom: 12px;
@@ -118,7 +123,7 @@
 .foto-row {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* foto di kiri, tombol di kanan */
+  justify-content: space-between;
   margin-top: 15px;
 }
 .foto-box {
@@ -165,19 +170,57 @@
   padding-bottom: 10px;
 }
 
+/* 🌟 Tombol Save & Edit */
 .circle-btn-wrapper {
   display: flex;
   justify-content: flex-end;
   margin-top: 50px;
   gap: 15px;
 }
-
 .circle-btn {
-  width: 55px;
-  height: 55px;
+  width: 60px;
+  height: 60px;
   --border-radius: 50%;
   --background: #2f3e2f;
+  --box-shadow: none;     
+  background: #2f3e2f !important;
   color: #fff;
+  border: none;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.circle-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.photo-modal {
+  --background: black; // full black background
+}
+
+.photo-viewer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 28px;
+  z-index: 10;
 }
 
 /* 🌟 Logout */
@@ -192,31 +235,22 @@
 ion-tab-bar {
   background-color: #fff;
   display: flex;
-  justify-content: space-around; /* bagi rata */
+  justify-content: space-around;
 }
-
-/* Biar tiap tombol tab ukurannya sama */
 ion-tab-button {
-  flex: 1; /* tiap tab tombol punya lebar sama rata */
-  --color: #888; /* warna default */
-  --color-selected: #4CAF70; /* warna aktif */
+  flex: 1;
+  --color: #888;
+  --color-selected: #4CAF70;
   transition: transform 0.2s ease, color 0.2s ease;
 }
-
-/* Icon dalam tab */
 ion-tab-button ion-icon {
   font-size: 22px;
   margin-bottom: 2px;
 }
-
-/* Hover tab */
 ion-tab-button:hover {
   transform: scale(1.1);
-  color: #4CAF70; /* hijau saat hover */
+  color: #4CAF70;
 }
-
-/* Tab aktif */
 ion-tab-button.ion-selected {
   color: #4CAF70;
 }
-
