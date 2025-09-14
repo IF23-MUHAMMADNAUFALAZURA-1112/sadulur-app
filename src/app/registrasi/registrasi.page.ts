@@ -5,7 +5,7 @@ import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera
 import { Capacitor } from '@capacitor/core';
 
 interface RegistrationPayload {
-  fullName: string;
+  nama: string;
   nik: string;
   email: string;
   whatsapp: string;
@@ -30,11 +30,11 @@ export class RegistrasiPage {
 
   constructor(
     private fb: FormBuilder,
-    public navCtrl: NavController,   // harus public supaya bisa dipakai di template
+    public navCtrl: NavController,
     private alertCtrl: AlertController
   ) {
     this.form = this.fb.group({
-      fullName: ['', [Validators.required, Validators.minLength(2)]],
+      nama: ['', [Validators.required, Validators.minLength(2)]],
       nik: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
       email: ['', [Validators.required, Validators.pattern(
         /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com|hotmail\.com|.*\.co\.id|.*\.id)$/
@@ -44,11 +44,11 @@ export class RegistrasiPage {
       address: ['', [Validators.required, Validators.minLength(5)]],
       password: ['', [Validators.required, Validators.maxLength(8)]],
       confirmPassword: ['', [Validators.required, Validators.maxLength(8)]],
-      photo: ['', [Validators.required, this.imageTypeValidator()]],
+      photo: ['', [Validators.required, this.imageTypeValidator(), this.imageSizeValidator()]],
     }, { validators: this.passwordsMatchValidator });
   }
 
-  // Getter untuk template agar bisa pakai showPassword / showPassword2
+  // Getter untuk template
   get showPassword(): boolean { return this.showPass; }
   set showPassword(v: boolean) { this.showPass = v; }
   get showPassword2(): boolean { return this.showPass2; }
@@ -64,14 +64,24 @@ export class RegistrasiPage {
     return (control: AbstractControl): ValidationErrors | null => {
       const v = (control.value ?? '') as string;
       if (!v) return null;
-      const lowered = v.toLowerCase();
       const ok =
-        lowered.endsWith('.jpg') ||
-        lowered.endsWith('.jpeg') ||
-        lowered.endsWith('.png') ||
-        lowered.startsWith('data:image/jpeg') ||
-        lowered.startsWith('data:image/png');
+        v.startsWith('data:image/jpeg') ||
+        v.startsWith('data:image/png') ||
+        v.endsWith('.jpg') ||
+        v.endsWith('.jpeg') ||
+        v.endsWith('.png');
       return ok ? null : { invalidImageType: true };
+    };
+  }
+
+  private imageSizeValidator() {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const v = (control.value ?? '') as string;
+      if (!v.startsWith('data:image')) return null;
+      // hitung perkiraan ukuran dari base64: 1 char ~ 0.75 byte
+      const base64Length = v.length - v.indexOf('base64,') - 7;
+      const size = base64Length * 0.75;
+      return size <= this.MAX_PHOTO_SIZE ? null : { imageTooLarge: true };
     };
   }
 
@@ -86,7 +96,7 @@ export class RegistrasiPage {
     try {
       if (Capacitor.getPlatform() !== 'web') {
         const photo: Photo = await Camera.getPhoto({
-          quality: 70,
+          quality: 50,
           allowEditing: false,
           resultType: CameraResultType.DataUrl,
           source: CameraSource.Prompt,
@@ -94,7 +104,7 @@ export class RegistrasiPage {
         });
         if (!photo.dataUrl) { await this.showAlert('Gagal memuat foto', 'Silakan coba lagi.'); return; }
         this.photoPreview = photo.dataUrl;
-        this.setPhotoControl('dataUrl');
+        this.form.patchValue({ photo: this.photoPreview });
         return;
       }
       const el = document.querySelector('input[type=file]') as HTMLInputElement | null;
@@ -124,22 +134,22 @@ export class RegistrasiPage {
     }
 
     const reader = new FileReader();
-    reader.onload = () => { this.photoPreview = reader.result as string; };
+    reader.onload = () => {
+      this.photoPreview = reader.result as string;
+      this.form.patchValue({ photo: this.photoPreview });
+    };
     reader.readAsDataURL(file);
-
-    this.setPhotoControl('dataUrl');
-  }
-
-  private setPhotoControl(value: string) {
-    this.form.patchValue({ photo: value });
   }
 
   async submit() {
     this.form.markAllAsTouched();
-    if (this.form.invalid) { await this.showAlert('Form belum lengkap', 'Silahkan lengkapi data.'); return; }
+    if (this.form.invalid) {
+      await this.showAlert('Form belum lengkap', 'Silahkan lengkapi data.');
+      return;
+    }
 
     const payload: RegistrationPayload = {
-      fullName: this.form.value.fullName,
+      nama: this.form.value.nama,   // 🔥 ganti fullName → nama
       nik: this.form.value.nik,
       email: this.form.value.email,
       whatsapp: this.form.value.whatsapp,

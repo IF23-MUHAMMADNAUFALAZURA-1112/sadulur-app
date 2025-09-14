@@ -65,6 +65,11 @@ const routes: Routes = [
     path: 'informasi',
     loadChildren: () => import('./informasi/informasi.module').then( m => m.InformasiPageModule)
   },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule),
+    data: { showNavbar: false }
+  },
 ];
 
 @NgModule({

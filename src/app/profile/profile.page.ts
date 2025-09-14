@@ -1,24 +1,22 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { NavController, ActionSheetController, AlertController, GestureController } from '@ionic/angular';
+import {
+  NavController,
+  ActionSheetController,
+  AlertController,
+  GestureController,
+} from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 interface UserProfile {
   nik: string;
   password: string;
-  nama: string;
+  nama: string;       // field untuk menampilkan nama di profile
   email: string;
   whatsapp: string;
   phone: string;
   address: string;
   foto?: string;
-}
-
-interface Pengumuman {
-  id: number;
-  title: string;
-  message: string;
-  date: string;
-  read: boolean; // 🔹 tambah properti read
+  fullName?: string;  // opsional, dari data registrasi
 }
 
 @Component({
@@ -54,8 +52,15 @@ export class ProfilePage implements OnInit, AfterViewInit {
   ngOnInit() {
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
-      const parsed = JSON.parse(storedUser) as Partial<UserProfile>;
-      this.user = { ...this.user, ...parsed };
+      const parsed = JSON.parse(storedUser) as any;
+
+      // Pastikan user.nama terisi dari nama atau fullName
+      this.user = {
+        ...this.user,
+        ...parsed,
+        nama: parsed.nama || parsed.fullName || '', // fallback ke fullName
+      };
+
       if (!this.user.foto) this.user.foto = this.DEFAULT_FOTO;
     } else {
       this.navCtrl.navigateRoot('/login');
@@ -69,16 +74,25 @@ export class ProfilePage implements OnInit, AfterViewInit {
         el: img,
         gestureName: 'double-tap-zoom',
         onEnd: () => {
-          img.style.transform = img.style.transform === 'scale(2)' ? 'scale(1)' : 'scale(2)';
+          img.style.transform =
+            img.style.transform === 'scale(2)' ? 'scale(1)' : 'scale(2)';
         },
       });
       gesture.enable(true);
     }
   }
 
-  goBack() { this.navCtrl.navigateBack('/dashboard'); }
-  openProfileModal() { this.isModalOpen = true; }
-  closeProfileModal() { this.isModalOpen = false; }
+  goBack() {
+    this.navCtrl.navigateBack('/dashboard');
+  }
+
+  openProfileModal() {
+    this.isModalOpen = true;
+  }
+
+  closeProfileModal() {
+    this.isModalOpen = false;
+  }
 
   async pickImage() {
     const actionSheet = await this.actionSheetCtrl.create({
@@ -101,9 +115,12 @@ export class ProfilePage implements OnInit, AfterViewInit {
         resultType: CameraResultType.DataUrl,
         source,
       });
+
       if (image.dataUrl) {
         this.user.foto = image.dataUrl;
-        this.saveProfile(true); // skip alert
+        this.saveToLocalStorage();
+        this.addAnnouncement('Foto profil berhasil diperbarui!');
+        this.showAlert('Berhasil', 'Foto profil berhasil diperbarui!');
       }
     } catch (error) {
       console.error('Gagal ambil foto:', error);
@@ -112,44 +129,48 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   async deletePhoto() {
     this.user.foto = this.DEFAULT_FOTO;
-    this.saveProfile(true); // skip alert
-  }
-
-  enableEdit() { this.isEditing = true; }
-
-  /** Simpan profil & buat pengumuman */
-  async saveProfile(skipAlert = false) {
-    this.isEditing = false;
     this.saveToLocalStorage();
-    this.addPengumuman('Profil Diperbarui', 'Anda berhasil memperbarui profil!');
-    if (!skipAlert) this.showAlert('Berhasil', 'Profil berhasil diperbarui!');
+    this.addAnnouncement('Foto profil berhasil dihapus!');
+    this.showAlert('Berhasil', 'Foto profil berhasil dihapus!');
   }
 
-  /** Hitung jumlah pengumuman belum dibaca */
-  getUnreadPengumumanCount(): number {
-    const stored = localStorage.getItem('pengumuman');
-    const arr: Pengumuman[] = stored ? JSON.parse(stored) : [];
-    return arr.filter(p => !p.read).length;
+  enableEdit() {
+    this.isEditing = true;
   }
 
-  private saveToLocalStorage() { localStorage.setItem('currentUser', JSON.stringify(this.user)); }
+  async saveProfile() {
+    this.isEditing = false;
+    // pastikan nama juga tersimpan ke field fullName agar sinkron dengan registrasi
+    this.user.fullName = this.user.nama;
+    this.saveToLocalStorage();
 
-  /** Tambah pengumuman baru */
-  private addPengumuman(title: string, message: string) {
-    const stored = localStorage.getItem('pengumuman');
-    const arr: Pengumuman[] = stored ? JSON.parse(stored) : [];
-    arr.unshift({
-      id: Date.now(),
-      title,
+    // Tambahkan pengumuman
+    this.addAnnouncement(`Profil ${this.user.nama} berhasil diperbarui.`);
+
+    this.showAlert('Berhasil', 'Profil berhasil diperbarui!');
+  }
+
+  private saveToLocalStorage() {
+    localStorage.setItem('currentUser', JSON.stringify(this.user));
+  }
+
+  // ✅ Simpan pengumuman ke localStorage key "pengumuman" agar sinkron dengan PengumumanPage
+  private addAnnouncement(message: string) {
+    const pengumuman = JSON.parse(localStorage.getItem('pengumuman') || '[]');
+    pengumuman.unshift({
+      title: 'Perubahan Profil',
       message,
-      date: new Date().toISOString(),
-      read: false, // 🔹 selalu unread
+      date: new Date().toISOString()
     });
-    localStorage.setItem('pengumuman', JSON.stringify(arr));
+    localStorage.setItem('pengumuman', JSON.stringify(pengumuman));
   }
 
   private async showAlert(header: string, message: string) {
-    const alert = await this.alertCtrl.create({ header, message, buttons: ['OK'] });
+    const alert = await this.alertCtrl.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
     await alert.present();
   }
 
@@ -159,10 +180,13 @@ export class ProfilePage implements OnInit, AfterViewInit {
       message: 'Apakah Anda yakin ingin keluar?',
       buttons: [
         { text: 'Batal', role: 'cancel' },
-        { text: 'Logout', handler: () => {
+        {
+          text: 'Logout',
+          handler: () => {
             localStorage.removeItem('currentUser');
             this.navCtrl.navigateRoot('/login');
-        }},
+          },
+        },
       ],
     });
     await alert.present();

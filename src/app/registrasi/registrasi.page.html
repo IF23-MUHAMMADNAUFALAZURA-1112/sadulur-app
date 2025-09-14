@@ -26,7 +26,7 @@
             Nama <span style="color: red">*</span>
           </ion-label>
           <ion-input
-            formControlName="fullName"
+            formControlName="nama"
             placeholder="Masukkan nama lengkap Anda"
             type="text"
             autocapitalize="words"
@@ -38,13 +38,13 @@
         </ion-note>
         <ion-text
           color="danger"
-          *ngIf="f['fullName'].touched && f['fullName'].invalid"
+          *ngIf="f['nama'].touched && f['nama'].invalid"
         >
-          <p *ngIf="f['fullName'].errors?.['required']">Nama wajib diisi.</p>
-          <p *ngIf="f['fullName'].errors?.['minlength']">
+          <p *ngIf="f['nama'].errors?.['required']">Nama wajib diisi.</p>
+          <p *ngIf="f['nama'].errors?.['minlength']">
             Nama minimal 2 karakter.
           </p>
-          <p *ngIf="f['fullName'].errors?.['maxlength']">
+          <p *ngIf="f['nama'].errors?.['maxlength']">
             Nama maksimal 50 karakter.
           </p>
         </ion-text>
@@ -188,7 +188,7 @@
           <ion-button
             fill="clear"
             slot="end"
-            (click)="showPassword = !showPassword"
+            (click)="togglePass()"
             aria-label="Tampilkan/Sembunyikan password"
           >
             <ion-icon
@@ -227,7 +227,7 @@
           <ion-button
             fill="clear"
             slot="end"
-            (click)="showPassword2 = !showPassword2"
+            (click)="togglePass2()"
             aria-label="Tampilkan/Sembunyikan konfirmasi password"
           >
             <ion-icon
@@ -237,20 +237,9 @@
         </ion-item>
         <ion-text
           color="danger"
-          *ngIf="
-            f['confirmPassword'].touched &&
-            (f['confirmPassword'].invalid || form.hasError('passwordsMismatch'))
-          "
+          *ngIf="form.hasError('passwordsMismatch') && f['confirmPassword'].touched"
         >
-          <p *ngIf="f['confirmPassword'].errors?.['required']">
-            Konfirmasi password wajib diisi.
-          </p>
-          <p *ngIf="f['confirmPassword'].errors?.['maxlength']">
-            Maksimal 8 karakter.
-          </p>
-          <p *ngIf="form.hasError('passwordsMismatch')">
-            Konfirmasi password tidak sama.
-          </p>
+          <p>Konfirmasi password tidak sama.</p>
         </ion-text>
 
         <!-- Upload Foto -->
@@ -283,19 +272,8 @@
             (change)="onFilePicked($event)"
           />
 
-          <!-- Kontrol 'photo' terhubung ke FormGroup -->
-          <input formControlName="photo" type="hidden" />
-
           <small>jpg/png, maksimal 5MB</small>
-
-          <ion-text
-            color="danger"
-            *ngIf="f['photo'].touched && f['photo'].invalid"
-          >
-            Foto wajib dipilih (format jpg/png, maks 5MB).
-          </ion-text>
         </div>
-
       </ion-list>
 
       <ion-button expand="block" class="signup-btn" type="submit">

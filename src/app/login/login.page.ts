@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
 
 interface RegistrationPayload {
-  fullName: string;
+  nama: string;
   nik: string;
   email: string;
   whatsapp: string;
@@ -34,7 +34,9 @@ export class LoginPage {
     });
   }
 
-  togglePasswordVisibility() { this.showPassword = !this.showPassword; }
+  togglePasswordVisibility() { 
+    this.showPassword = !this.showPassword; 
+  }
 
   ionViewWillEnter() {
     const user = localStorage.getItem('currentUser');
@@ -59,7 +61,7 @@ export class LoginPage {
 
     const userToSave = {
       nik: matchedUser.nik,
-      fullName: matchedUser.fullName,
+      nama: matchedUser.nama,
       email: matchedUser.email,
       whatsapp: matchedUser.whatsapp,
       phone: matchedUser.phone,
@@ -69,7 +71,7 @@ export class LoginPage {
     };
 
     localStorage.setItem('currentUser', JSON.stringify(userToSave));
-    await this.showAlert('Login Berhasil', `Selamat datang ${userToSave.fullName}!`);
+    await this.showAlert('Login Berhasil', `Selamat datang ${userToSave.nama}!`);
     this.navCtrl.navigateRoot('/dashboard');
   }
 
